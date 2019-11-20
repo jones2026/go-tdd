@@ -17,17 +17,21 @@ func main() {
 		// Validate: game.ValidateCompetitor,
 	}
 
-	human, _ := prompt.Run()
+	humanChoice, _ := prompt.Run()
+	computerChoice := getComputerChoice()
 
-	competitors := make([]string, 0)
-	competitors = append(competitors,
+	fmt.Println("Computer Choice", computerChoice)
+
+	fmt.Println(game.ScoreGame(humanChoice, computerChoice), "wins!")
+}
+
+func getComputerChoice() string {
+	options := make([]string, 0)
+	options = append(options,
 		"rock",
 		"paper",
 		"scissors")
 
 	rand.Seed(time.Now().Unix())
-	computer := competitors[rand.Intn(len(competitors))]
-	fmt.Println("Computer chose", computer)
-
-	fmt.Println(game.ScoreGame(human, computer), "wins!")
+	return options[rand.Intn(len(options))]
 }
